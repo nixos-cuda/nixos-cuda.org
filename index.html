@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NixOS CUDA Team</title>
+  <meta name="description" content="Landing page for the NixOS CUDA maintainers team.">
+  <style>
+    :root {
+      color-scheme: light dark;
+      --nix-blue: #5277c3;
+      --nix-blue-dark: #364d90;
+      --nix-blue-light: #d9e3ff;
+      --bg: #f7f9fc;
+      --bg-dark: #111827;
+      --text: #1f2937;
+      --text-dark: #f9fafb;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: var(--bg-dark);
+        color: var(--text-dark);
+      }
+      a {
+        color: #a0c4ff;
+      }
+      .card, .sidebar {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.1);
+      }
+      header.hero {
+        background: linear-gradient(135deg, rgba(82, 119, 195, 0.25), rgba(54, 77, 144, 0.35));
+      }
+    }
+    header.hero {
+      background: linear-gradient(135deg, rgba(82, 119, 195, 0.12), rgba(54, 77, 144, 0.2));
+      border-bottom: 4px solid var(--nix-blue);
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+    header.hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3rem);
+      margin-bottom: 1rem;
+    }
+    header.hero p {
+      max-width: 45rem;
+      margin: 0 auto;
+      font-size: 1.125rem;
+    }
+    main {
+      flex: 1;
+      width: min(1100px, 94vw);
+      margin: -2rem auto 3rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 2rem;
+    }
+    @media (min-width: 960px) {
+      main {
+        grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr);
+        align-items: start;
+      }
+    }
+    article {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 25px 50px -12px rgba(79, 70, 229, 0.08);
+    }
+    @media (prefers-color-scheme: dark) {
+      article {
+        background: rgba(17, 24, 39, 0.6);
+        border-color: rgba(255, 255, 255, 0.08);
+      }
+    }
+    article > section + section {
+      margin-top: 2rem;
+    }
+    h2 {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+      color: var(--nix-blue);
+    }
+    h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+    p {
+      margin-bottom: 1rem;
+    }
+    ul, ol {
+      margin-left: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    ul li + li {
+      margin-top: 0.5rem;
+    }
+    .sidebar {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 1.75rem;
+      box-shadow: 0 20px 40px -18px rgba(82, 119, 195, 0.25);
+      display: grid;
+      gap: 1.75rem;
+      height: fit-content;
+    }
+    .sidebar h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .sidebar ul {
+      list-style: none;
+      margin: 0;
+    }
+    .sidebar li + li {
+      border-top: 1px solid rgba(82, 119, 195, 0.2);
+      padding-top: 0.75rem;
+      margin-top: 0.75rem;
+    }
+    .member-handle {
+      display: block;
+      font-size: 0.95rem;
+      opacity: 0.8;
+    }
+    .member-note {
+      display: block;
+      font-size: 0.9rem;
+      color: rgba(82, 119, 195, 0.85);
+      margin-top: 0.25rem;
+    }
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .card {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 1.25rem;
+      background: white;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .card:hover,
+    .card:focus-within {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 32px -16px rgba(82, 119, 195, 0.28);
+    }
+    .card a {
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--nix-blue);
+    }
+    footer {
+      text-align: center;
+      padding: 2rem 1rem 3rem;
+      font-size: 0.9rem;
+      color: rgba(31, 41, 55, 0.7);
+    }
+    @media (prefers-color-scheme: dark) {
+      .card {
+        background: rgba(17, 24, 39, 0.6);
+        border-color: rgba(255, 255, 255, 0.08);
+      }
+      .card a {
+        color: #9cc1ff;
+      }
+      footer {
+        color: rgba(249, 250, 251, 0.6);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <h1>CUDA Team</h1>
+    <p>The CUDA team is responsible for everything related to <a href="https://developer.nvidia.com/cuda-zone">CUDA</a> in <a href="https://github.com/NixOS/nixpkgs">Nixpkgs</a>.</p>
+  </header>
+  <main>
+    <article>
+      <section id="motivation">
+        <h2>Motivation</h2>
+        <p>GPU-acceleration has become a fundamental prerequisite to machne learning work and scientific computing. Without support for GPU-acceleration, the Nixpkgs ecosystem will remain largely invisible to practitioners.</p>
+        <p>Nixpkgs and NixOS give us the tools we need to build reproducile and robust packages and environments. However, the state of scientific computing in Nixpkgs does not reflect this.</p>
+      </section>
+      <section id="goals-and-responsibilities">
+        <h2>Goals and Responsibilities</h2>
+        <p>The singular focus of the CUDA-maintainers team is to make Nixpkgs the best repository of packages leveraging CUDA, especially in machine learning and scientific computing. Towards that end, we seek to:</p>
+        <ul>
+          <li>improve the quantity and quality of CUDA-enabled package in Nixpkgs</li>
+          <li>document CUDA packaging best practices, guidelines, and pattrns</li>
+          <li>support community efforts involving packaging or distributing CUDA-enabled software</li>
+        </ul>
+      </section>
+      <section id="call-for-sponsors">
+        <h2>Call for Sponsors</h2>
+        <p>The CUDA-maintainers team is seeking sponsors to help fund or upply technical infrastructure related to our mission. Therefore, if you or your organization:</p>
+        <ul>
+          <li>are impacted by these issues,</li>
+          <li>have related issues with Nixpkgs CUDA support,</li>
+          <li>would like to prioritize or accelerate certain work,</li>
+        </ul>
+        <p>Please consider supporting this effort directly or through the NixOS Foundation. Reach out via GitHub <a href="https://github.com/connorbaker">@connorbaker</a>, or email <a href="mailto:connorbaker01@gmail.com">connorbaker01@gmail.com</a> to get involved.</p>
+      </section>
+      <section id="contact-and-information">
+        <h2>Contact and Information</h2>
+        <p>Discussions are held on Matrix, Discourse, and on GitHub issues and pull requests.</p>
+        <div class="resource-grid" aria-label="Key links">
+          <div class="card"><a href="https://nixos.org/manual/nixpkgs/unstable/#cuda">Nixpkgs manual's CUDA section</a></div>
+          <div class="card"><a href="https://discourse.nixos.org/t/announcing-the-nixos-cuda-maintainers-team-and-a-call-for-maintainers/18074">Discourse</a></div>
+          <div class="card"><a href="https://matrix.to/#/#cuda:nixos.org">Matrix</a></div>
+          <div class="card"><a href="https://github.com/orgs/NixOS/projects/27">GitHub Project board</a></div>
+          <div class="card"><a href="https://github.com/orgs/NixOS/teams/cuda-maintainers">GitHub Team page</a></div>
+        </div>
+      </section>
+    </article>
+    <aside class="sidebar">
+      <section aria-labelledby="members-heading">
+        <h2 id="members-heading">Members</h2>
+        <ul>
+          <li>
+            <strong>Samuel A</strong>
+            <a class="member-handle" href="https://discourse.nixos.org/u/samuela">@samuela</a>
+            <span class="member-note">Team creator</span>
+          </li>
+          <li>
+            <strong>Serge K</strong>
+            <a class="member-handle" href="https://discourse.nixos.org/u/sergek">@sergek</a>
+          </li>
+          <li>
+            <strong>Connor Baker</strong>
+            <a class="member-handle" href="https://discourse.nixos.org/u/connorbaker">@connorbaker</a>
+          </li>
+          <li>
+            <strong>Ga&eacute;tan Lepage</strong>
+            <a class="member-handle" href="https://discourse.nixos.org/u/glepage">@glepage</a>
+          </li>
+        </ul>
+      </section>
+      <section aria-labelledby="contact-heading">
+        <h2 id="contact-heading">Contact</h2>
+        <ul>
+          <li><a href="https://discourse.nixos.org/t/announcing-the-nixos-cuda-maintainers-team-and-a-call-for-maintainers/18074">Discourse thread</a></li>
+          <li><a href="https://matrix.to/#/#cuda:nixos.org">Matrix room</a></li>
+          <li><a href="https://github.com/orgs/NixOS/projects/27">GitHub project board</a></li>
+        </ul>
+      </section>
+      <section aria-labelledby="infrastructure-heading">
+        <h2 id="infrastructure-heading">Infrastructure</h2>
+        <ul>
+          <li><a href="https://hydra.nixos-cuda.org/">hydra.nixos-cuda.org</a> - project builds on our Hydra instance</li>
+          <li><a href="https://cache.nixos-cuda.org/">cache.nixos-cuda.org</a> - binary cache serving CUDA artifacts</li>
+        </ul>
+      </section>
+    </aside>
+  </main>
+  <footer>
+    Maintained by the NixOS CUDA team. Content adapted from <a href="https://nixos.org/community/teams/cuda/">nixos.org</a>.
+  </footer>
+</body>
+</html>
