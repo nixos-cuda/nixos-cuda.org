@@ -38,10 +38,6 @@
       a {
         color: #a0c4ff;
       }
-      .card, .sidebar {
-        background: rgba(255, 255, 255, 0.05);
-        border-color: rgba(255, 255, 255, 0.1);
-      }
       header.hero {
         background: linear-gradient(135deg, rgba(82, 119, 195, 0.25), rgba(54, 77, 144, 0.35));
       }
@@ -133,6 +129,9 @@
       padding-top: 0.75rem;
       margin-top: 0.75rem;
     }
+    .sidebar li > strong {
+      color: #111827;
+    }
     .member-handle {
       display: block;
       font-size: 0.95rem;
@@ -174,9 +173,19 @@
       color: rgba(31, 41, 55, 0.7);
     }
     @media (prefers-color-scheme: dark) {
+      .sidebar {
+        background: rgba(17, 24, 39, 0.6);
+        border-color: rgba(255, 255, 255, 0.08);
+      }
+      .sidebar li + li {
+        border-top-color: rgba(156, 193, 255, 0.3);
+      }
       .card {
         background: rgba(17, 24, 39, 0.6);
         border-color: rgba(255, 255, 255, 0.08);
+      }
+      .sidebar li > strong {
+        color: #f9fafb;
       }
       .card a {
         color: #9cc1ff;
