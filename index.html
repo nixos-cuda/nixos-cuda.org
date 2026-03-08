@@ -38,10 +38,6 @@
       a {
         color: #a0c4ff;
       }
-      .card, .sidebar {
-        background: rgba(255, 255, 255, 0.05);
-        border-color: rgba(255, 255, 255, 0.1);
-      }
       header.hero {
         background: linear-gradient(135deg, rgba(82, 119, 195, 0.25), rgba(54, 77, 144, 0.35));
       }
@@ -133,6 +129,9 @@
       padding-top: 0.75rem;
       margin-top: 0.75rem;
     }
+    .sidebar li > strong {
+      color: #111827;
+    }
     .member-handle {
       display: block;
       font-size: 0.95rem;
@@ -174,9 +173,19 @@
       color: rgba(31, 41, 55, 0.7);
     }
     @media (prefers-color-scheme: dark) {
+      .sidebar {
+        background: rgba(17, 24, 39, 0.6);
+        border-color: rgba(255, 255, 255, 0.08);
+      }
+      .sidebar li + li {
+        border-top-color: rgba(156, 193, 255, 0.3);
+      }
       .card {
         background: rgba(17, 24, 39, 0.6);
         border-color: rgba(255, 255, 255, 0.08);
+      }
+      .sidebar li > strong {
+        color: #f9fafb;
       }
       .card a {
         color: #9cc1ff;
@@ -196,21 +205,21 @@
     <article>
       <section id="motivation">
         <h2>Motivation</h2>
-        <p>GPU-acceleration has become a fundamental prerequisite to machne learning work and scientific computing. Without support for GPU-acceleration, the Nixpkgs ecosystem will remain largely invisible to practitioners.</p>
-        <p>Nixpkgs and NixOS give us the tools we need to build reproducile and robust packages and environments. However, the state of scientific computing in Nixpkgs does not reflect this.</p>
+        <p>GPU-acceleration has become a fundamental prerequisite to machine learning work and scientific computing. Without support for GPU-acceleration, the Nixpkgs ecosystem will remain largely invisible to practitioners.</p>
+        <p>Nixpkgs and NixOS give us the tools we need to build reproducible and robust packages and environments. However, the state of scientific computing in Nixpkgs does not reflect this.</p>
       </section>
       <section id="goals-and-responsibilities">
         <h2>Goals and Responsibilities</h2>
         <p>The singular focus of the CUDA-maintainers team is to make Nixpkgs the best repository of packages leveraging CUDA, especially in machine learning and scientific computing. Towards that end, we seek to:</p>
         <ul>
-          <li>improve the quantity and quality of CUDA-enabled package in Nixpkgs</li>
-          <li>document CUDA packaging best practices, guidelines, and pattrns</li>
+          <li>improve the quantity and quality of CUDA-enabled packages in Nixpkgs</li>
+          <li>document CUDA packaging best practices, guidelines, and patterns</li>
           <li>support community efforts involving packaging or distributing CUDA-enabled software</li>
         </ul>
       </section>
       <section id="call-for-sponsors">
         <h2>Call for Sponsors</h2>
-        <p>The CUDA-maintainers team is seeking sponsors to help fund or upply technical infrastructure related to our mission. Therefore, if you or your organization:</p>
+        <p>The CUDA-maintainers team is seeking sponsors to help fund or supply technical infrastructure related to our mission. Therefore, if you or your organization:</p>
         <ul>
           <li>are impacted by these issues,</li>
           <li>have related issues with Nixpkgs CUDA support,</li>
