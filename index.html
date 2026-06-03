@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>NixOS CUDA Team</title>
-  <meta name="description" content="Landing page for the NixOS CUDA maintainers team.">
+  <title>Nixpkgs CUDA</title>
+  <meta name="description" content="Nixpkgs CUDA">
   <style>
     :root {
       color-scheme: light dark;
@@ -20,6 +20,10 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+    }
+    q {
+      quotes: "«" "»" "‹" "›";
+      font-style: italic;
     }
     body {
       font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -198,92 +202,161 @@
 </head>
 <body>
   <header class="hero">
-    <h1>CUDA Team</h1>
-    <p>The CUDA team is responsible for everything related to <a href="https://developer.nvidia.com/cuda-zone">CUDA</a> in <a href="https://github.com/NixOS/nixpkgs">Nixpkgs</a>.</p>
+    <h1>Nixpkgs CUDA</h1>
+    <p>First-class [<a href="https://developer.nvidia.com/cuda-zone">CUDA</a>-]accelerated computing support in <a href="https://github.com/NixOS/nixpkgs">Nixpkgs</a> and the <a href="https://nixos.org/community/#forks">Ecosystem</a>.</p>
   </header>
   <main>
     <article>
       <section id="motivation">
-        <h2>Motivation</h2>
-        <p>GPU-acceleration has become a fundamental prerequisite to machine learning work and scientific computing. Without support for GPU-acceleration, the Nixpkgs ecosystem will remain largely invisible to practitioners.</p>
-        <p>Nixpkgs and NixOS give us the tools we need to build reproducible and robust packages and environments. However, the state of scientific computing in Nixpkgs does not reflect this.</p>
+        <h2><a href="#motivation">Motivation</a></h2>
+        <p>
+        Nixpkgs are a foundational tool promising to rescue the modern software supply chain from its exploding complexity.
+        Over the past decade,
+        <a href="https://nixos.org/community/#forks">"Functional Package Management"</a>,
+        once seen as an Academic fancy,
+        has been embraced by the Industry as a requirement for mission-critical systems.
+        </p>
+        <p>
+        The Nixpkgs CUDA effort <a href="https://discourse.nixos.org/t/announcing-the-nixos-cuda-maintainers-team-and-a-call-for-maintainers/18074">began</a>
+        in ambition to revision Reproducible Research, Scientific and High-Performance Computing (HPC)
+        as grounded in this paradigm of "immutable" and "functional" software management.
+        </p>
       </section>
       <section id="goals-and-responsibilities">
-        <h2>Goals and Responsibilities</h2>
-        <p>The singular focus of the CUDA-maintainers team is to make Nixpkgs the best repository of packages leveraging CUDA, especially in machine learning and scientific computing. Towards that end, we seek to:</p>
+        <h2>Principles</h2>
         <ul>
-          <li>improve the quantity and quality of CUDA-enabled packages in Nixpkgs</li>
-          <li>document CUDA packaging best practices, guidelines, and patterns</li>
-          <li>support community efforts involving packaging or distributing CUDA-enabled software</li>
+            <li>
+                Our work is <i>goals-driven</i>:
+                <p>
+                Nixpkgs doesn't need <q>CUDA ("AI") for the sake of CUDA ("AI")</q>.
+                We anticipate "Functional Software Deployment"
+                becoming the standard in Research and HPC,
+                as it has for the software industry at large.
+                We cautiously believe this development may foster creativity,
+                re-introduce the feeling of "playful exploration"
+                for the researcher, the curious "hacker", and the end-user of such research alike.
+                We seek to bring <i>that</i> future closer.</p>
+                <!--
+                    <p>
+                    Nixpkgs doesn't need CUDA.
+                    Nixpkgs suffers from CUDA,
+                    which imposes a heavy maintenance toll
+                    on maintainers of <code>stdenv</code>, toolchains, setup-hooks, <code>python3XPackages</code>,
+                    and on the general reviewer.
+                    Some maintainers would see CUDA removed.</p>
+                    <p>As of <code>$(date)</code>,
+                    Nixpkgs CUDA does <b>not</b> yet benefit the researcher, the hacker, or the end-user.
+                    Unintentionally, it does drive the multi-billion dollar enterprise.</p>
+                -->
+                <p>Our incentive is to collaborate with the researcher, the RSE, and the individual.
+                For the enterprise, we and the broader Nixpkgs community
+                offer plentiful <a href="#call-for-sponsors">commercial support</a> options.</p>
+            </li>
+            <li>We cannot impose work on others: we stand on the shoulders of giants,
+                and much of "CUDA" maintenance in Nixpkgs really happens in e.g.
+                <code>stdenv</code> and <code>python3XPackages</code>,
+                benefiting from <code>python-updates</code> and staging efforts.
+                We recognize we depend on so many other maintainers
+                and that our project cannot succeed unless their work is rewarding and sustainable.
+            </li>
+            <li>We support what we have access to: we'd like for Nixpkgs to encode the "know-how" for all hardware in existence and all use-cases imaginable,
+                but with our limited resources we must prioritize what we believe the common "hacker" and the "researcher" is likely to possess.
+                We'll restrict our attention to the devices we can add to our <a href="#infrastructure-heading">CI</a>.
+                We'd be excited to work with clusters of GB200:s, but such support can only be sustainably offered on a <a href="#call-for-sponsors">commercial basis</a>.
+            </li>
+        </ul>
+      </section>
+      <section id="scope">
+        <h2><a href="#scope">Scope</a> of Work</h2>
+        <ul>
+          <li>Design: for two decades Nixpkgs dedicated itself to determinism and correctness; we're researching how Nixpkgs can also accommodate "co-processor" or "accelerator" devices, ISA-specific optimizations, HPC- and RSE-specific workflows.</li>
+          <li>Packaging: select and maintain the core components of the Nixpkgs' HPC and Scientific Computing ecosystems.
+              We fill gaps, carry out updates, watch for regressions, upstream patches, identify and build test suites for important use-cases, tend to the infrastructure running these tests.</li>
+          <li>Documentation: we seek to identify and document CUDA deployment, RSE, and HPC best practices based on Nixpkgs.</li>
+          <li>Communication: Nixpkgs and the world of FOSS is a dynamic and quickly evolving organism with many stakeholders;
+              we believe it is our task to defend the interests of HPC and Scientific Computing in Nixpkgs' media,
+              and Nixpkgs' and Functional Package Management's interests in Upstream Projects and the Industry.</li>
         </ul>
       </section>
       <section id="call-for-sponsors">
         <h2>Call for Sponsors</h2>
-        <p>The CUDA-maintainers team is seeking sponsors to help fund or supply technical infrastructure related to our mission. Therefore, if you or your organization:</p>
+        <p>
+        Nixpkgs CUDA Team is seeking funding for infrastructure and maintenance.
+        Individual members offer commercial support services.
+        <a href="#contact-and-information">Reach out!</a>
+        </p>
+      </section>
+      <section id="contact-and-information">
+        <h2>Contacts</h2>
         <ul>
-          <li>are impacted by these issues,</li>
-          <li>have related issues with Nixpkgs CUDA support,</li>
-          <li>would like to prioritize or accelerate certain work,</li>
+            <li>Daniel Hofer: <a href="mailto:daniel@dhofer.com">daniel@dhofer.com</a></li>
+            <li><a href="https://github.com/connorbaker">Connor Baker</a>: <a href="mailto:connorbaker01@gmail.com">connorbaker01@gmail.com</a>.</li>
+            <li><a href="https://github.com/SomeoneSerge">@SomeoneSerge</a> and <a href="https://kerrukinutum.com">KerruKinutum Oy</a>: <a href="mailto:hello@kerrukinutum.com">hello@kerrukinutum.com</a>.</li>
+            <li><a href="https://github.com/GaetanLepage">Gaétan Lepage</a>: <a href="mailto:gaetan@glepage.com">gaetan@glepage.com</a>.</li>
+            <li>Yuriy Taraday: <a href="https://github.com/YorikSar"><code>@YorikSar</code></a>.</li>
+            <li>Broader <a href="https://nixos.org/community/commercial-support">Nixpkgs Community</a>.</li>
         </ul>
-        <p>Please consider supporting this effort directly or through the NixOS Foundation. Reach out via GitHub <a href="https://github.com/connorbaker">@connorbaker</a>, or email <a href="mailto:connorbaker01@gmail.com">connorbaker01@gmail.com</a> to get involved.</p>
       </section>
       <section id="acknowledgments">
         <h2>Acknowledgments</h2>
-        <p>The team <a href="https://discourse.nixos.org/t/announcing-the-nixos-cuda-maintainers-team-and-a-call-for-maintainers/18074">was founded in 2022</a> by <a href="https://samlikes.pizza/">Samuel Ainsworth</a> (<a href="https://github.com/samuela/nixpkgs-upkeep">nixpkgs-upkeep</a>, nixpkgs jaxlib, &c.)</p>
-      </section>
-      <section id="contact-and-information">
-        <h2>Contact and Information</h2>
-        <p>Discussions are held on Matrix, Discourse, and on GitHub issues and pull requests.</p>
-        <div class="resource-grid" aria-label="Key links">
-          <div class="card"><a href="https://nixos.org/manual/nixpkgs/unstable/#cuda">Nixpkgs manual's CUDA section</a></div>
-          <div class="card"><a href="https://discourse.nixos.org/t/announcing-the-nixos-cuda-maintainers-team-and-a-call-for-maintainers/18074">Discourse</a></div>
-          <div class="card"><a href="https://matrix.to/#/#cuda:nixos.org">Matrix</a></div>
-          <div class="card"><a href="https://github.com/orgs/NixOS/projects/27">GitHub Project board</a></div>
-          <div class="card"><a href="https://github.com/orgs/NixOS/teams/cuda-maintainers">GitHub Team page</a></div>
-          <div class="card"><a href="https://github.com/nixos-cuda">nixos-cuda on GitHub</a></div>
-        </div>
+        <p>The team <a href="https://discourse.nixos.org/t/announcing-the-nixos-cuda-maintainers-team-and-a-call-for-maintainers/18074">was founded in 2022</a> by <a href="https://samlikes.pizza/">Samuel Ainsworth</a> (<a href="https://github.com/samuela/nixpkgs-upkeep">nixpkgs-upkeep</a>, nixpkgs jaxlib, &amp;c.).
+        Past members include <a href="https://github.com/knedlsepp"><code>@knedlsepp</code></a>, <a href="https://github.com/prusnak/"><code>@prusnak</code></a>.
+        Much of the initial refactoring of <code>cudaPackages</code> had been done by <a href="https://github.com/FRidh/"><code>@FRidh</code></a>.
+        The Team has benefited greatly from help and advice of <a href="https://github.com/kmittman">Kevin Mittman</a>.
+        </p>
       </section>
     </article>
     <aside class="sidebar">
-      <section aria-labelledby="members-heading">
-        <h2 id="members-heading">Members</h2>
-        <ul>
-          <li>
-            <strong>Serge K</strong>
-            <a class="member-handle" href="https://discourse.nixos.org/u/sergek">@sergek</a>
-          </li>
-          <li>
-            <strong>Connor Baker</strong>
-            <a class="member-handle" href="https://discourse.nixos.org/u/connorbaker">@connorbaker</a>
-          </li>
-          <li>
-            <strong>Ga&eacute;tan Lepage</strong>
-            <a class="member-handle" href="https://discourse.nixos.org/u/glepage">@glepage</a>
-          </li>
-          <li>
-            <strong>Yuriy Taraday</strong>
-            <a class="member-handle" href="https://discourse.nixos.org/u/YorikSar">@YorikSar</a>
-          </li>
-        </ul>
-      </section>
       <section aria-labelledby="contact-heading">
-        <h2 id="contact-heading">Contact</h2>
+        <h2 id="contact-heading">Engage</h2>
         <ul>
-          <li><a href="https://discourse.nixos.org/t/announcing-the-nixos-cuda-maintainers-team-and-a-call-for-maintainers/18074">Discourse thread</a></li>
-          <li><a href="https://matrix.to/#/#cuda:nixos.org">Matrix room</a></li>
-          <li><a href="https://github.com/orgs/NixOS/projects/27">GitHub project board</a></li>
+          <li><a href="https://matrix.to/#/#cuda:nixos.org">Matrix</a></li>
+          <li><a href="https://discourse.nixos.org/t/announcing-the-nixos-cuda-maintainers-team-and-a-call-for-maintainers/18074">Discourse</a></li>
+          <li><a href="https://github.com/orgs/NixOS/projects/27">Tickets</a></li>
+          <li><a href="#call-for-sponsors">Funding</a></li>
         </ul>
       </section>
       <section aria-labelledby="infrastructure-heading">
         <h2 id="infrastructure-heading">Infrastructure</h2>
         <ul>
-          <li><a href="https://hydra.nixos-cuda.org/">hydra.nixos-cuda.org</a> - project builds on our Hydra instance</li>
+            <li><a href="https://hydra.nixos-cuda.org/">Hydra: builds &amp; tests</a></li>
+        </ul>
+      </section>
+      <section aria-labelledby="docs-heading">
+        <h2 id="docs-heading">Documentation</h2>
+        <ul>
+          <li><a href="https://nixos.org/manual/nixpkgs/unstable/#cuda">Nixpkgs Manual</a></li>
+        </ul>
+      </section>
+      <section aria-labelledby="members-heading">
+        <h2 id="members-heading">Team</h2>
+        <ul>
+          <li>
+            <strong>Daniel Hofer</strong>
+            <a class="member-handle" href="https://discourse.nixos.org/u/dhofer"><code>@dhofer</code></a>
+          </li>
+          <li>
+            <strong>Serge K</strong>
+            <a class="member-handle" href="https://discourse.nixos.org/u/sergek"><code>@SomeoneSerge</code></a>
+          </li>
+          <li>
+            <strong>Connor Baker</strong>
+            <a class="member-handle" href="https://discourse.nixos.org/u/connorbaker"><code>@ConnorBaker</code></a>
+          </li>
+          <li>
+            <strong>Ga&eacute;tan Lepage</strong>
+            <a class="member-handle" href="https://discourse.nixos.org/u/glepage"><code>@glepage</code></a>
+          </li>
+          <li>
+            <strong>Yuriy Taraday</strong>
+            <a class="member-handle" href="https://discourse.nixos.org/u/YorikSar"><code>@YorikSar</code></a>
+          </li>
         </ul>
       </section>
     </aside>
   </main>
   <footer>
-    Maintained by the NixOS CUDA team. Content adapted from <a href="https://nixos.org/community/teams/cuda/">nixos.org</a>.
+    Maintained by the NixOS CUDA Team.
   </footer>
 </body>
 </html>
